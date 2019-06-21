@@ -1,0 +1,81 @@
+body {
+  background:#1a1a1a;;
+}
+
+#root {
+  width: 80%;
+  margin: auto;
+  text-align: center;
+  color: #ed1c5b;
+}
+
+.load {
+  outline: none;
+  margin-top: 15%;
+  width: 250px;
+  height: 250px;
+  font-size: 40px;
+  color: #1a1a1a;
+  background: #ed1c5b;
+  border: none;
+  border-radius: 50%;
+  transition: box-shadow 400ms cubic-bezier(.2,0,.7,1);
+  cursor: pointer;
+}
+
+.load:hover {
+  box-shadow: 0 0 1px 20px rgba(184,90,124, 0.4),
+  0 0 1px 40px rgba(184,90,124, 0.1),
+  0 0 1px 60px rgba(184,90,124, 0.1);
+}
+
+ul {
+  list-style: none;
+  font-size: 20px;
+  width: 40%;
+  display: block;
+  margin: 20px auto;
+  padding: 0;
+  padding-left: 10px;
+  border: 5px dashed  #ed1c5b;
+  border-radius: 5px;
+}
+
+li {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  cursor: pointer;
+  margin-right: 10px;
+  height: 50px;
+  color: white;
+}
+
+.selected {
+  color: salmon;
+}
+
+button {
+  width: 110px;
+  height: 30px;
+  border-radius: 10px;
+  border: none;
+  background: salmon;
+  outline: none;
+}
+
+li > button:hover {
+  box-shadow: 0 0 10px 0 gray;
+  cursor: pointer;
+}
+
+ul ~ button:hover:enabled {
+  box-shadow: 0 0 10px 0 gray;
+  cursor: pointer;
+}
+
+.move {
+  font-size: 20px;
+  background: #ed1c5b;
+  margin-right: 10px;
+}
