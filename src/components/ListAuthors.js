@@ -14,16 +14,19 @@ function ListAuthors(props) {
             {props.data.map((item, index) => {
               if (item !== props.editItem) {
                 return (
-                  <li onClick={() => props.selected(index)}>
+                  <li onClick={() => props.selected(index)} key={item}>
                     <p className={index === props.index ? 'selected' : ''}>{item}</p>
                     <button type="button" onClick={() => props.chooseItem(item)}>Edit</button>
-                    {console.log(props.index)}
                   </li>
                 )
               } else {
                 return (
                   <li>
-                    <input defaultValue={props.editItem} onKeyPress={(event) => props.changeItem(props.data, event.target.value, props.editItem)}/>
+                    <input defaultValue={props.editItem} onKeyDown={(event) => {
+                      if (event.keyCode === 13) {
+                        props.changeItem(props.data, event.target.value, props.editItem)
+                      }
+                    }}/>
                   </li>
                 )
               }
