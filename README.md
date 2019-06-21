@@ -1,3 +1,4 @@
+# [prev] (https://laliquenoare.github.io/react_exam/)
 # Іспит із React та Redux
 
 Розробіть додаток, який завантажуватиме імена авторів з [http://my-json-server.typicode.com/mate-academy/literary-blog/authors](http://my-json-server.typicode.com/mate-academy/literary-blog/authors) та дозволятиме редагувати їх: змінювати, видаляти та міняти їхнє розташування у списку.
