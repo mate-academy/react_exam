@@ -3,6 +3,8 @@ export const DISPLAY = 'DISPLAY';
 export const SELECTED = 'SELECTED';
 export const MOVE_UP = 'MOVE_UP';
 export const MOVE_DOWN = 'MOVE_DOWN';
+export const REMOVE = 'REMOVE';
+export const RENAMED = 'RENAMED';
 
 export function load() {
   return (dispatch) => {
@@ -49,4 +51,18 @@ export function moveDown(names, index) {
     names,
     index
   };
+}
+
+export function remove(names) {
+  return {
+    type: REMOVE,
+    names
+  };
+}
+
+export function renamed(names) {
+  return {
+    type: RENAMED,
+    names
+  }
 }

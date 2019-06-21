@@ -1,6 +1,6 @@
 import {
   LOAD, DISPLAY,
-  SELECTED, MOVE_UP, MOVE_DOWN
+  SELECTED, MOVE_UP, MOVE_DOWN, REMOVE, RENAMED
 } from "./actions";
 
 const initialState = {
@@ -20,8 +20,8 @@ export function getNextState(state = initialState, action) {
       return {
         ...state,
         names: action.names
-      }; case SELECTED:
-      console.log('selected')
+      };
+      case SELECTED:
       return {
           ...state,
           selectedIndex: action.index
@@ -31,11 +31,23 @@ export function getNextState(state = initialState, action) {
         ...state,
         names: action.names,
         selectedIndex: action.index
-      }; case MOVE_DOWN:
+      };
+      case MOVE_DOWN:
       return {
         ...state,
         names: action.names,
         selectedIndex: action.index
+      };
+      case REMOVE:
+      return {
+        ...state,
+        names: action.names,
+        selectedIndex: null
+      };
+      case RENAMED:
+      return {
+        ...state,
+        names: action.names,
       };
     default:
       return state;
