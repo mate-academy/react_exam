@@ -10,7 +10,7 @@ export default function Names(props) {
       return (
         <Fragment>
           <ul>{props.names.map((name, index) =>
-            <li key={name} onClick={() => props.selectedLi(index)}>
+            <li key={name + index} onClick={() => props.selectedLi(index)}>
               {name}
               <button onClick={() => {
                 const names = [...props.names];
@@ -48,12 +48,12 @@ export default function Names(props) {
                 if (event.key === 'Enter' && event.target.value.trim() === '') {
                   const names = [...props.names];
                   names.splice(props.indexLi, 1);
-                  return props.remove(names)
+                  return props.remove(names);
                 }
               }
               } />}
         </Fragment>
-      )
+      );
     }
   }
 }
