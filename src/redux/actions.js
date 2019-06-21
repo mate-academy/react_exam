@@ -1,5 +1,3 @@
-import React from 'react';
-
 export const EDIT_ITEM = 'edit';
 export const REMOVE_ITEM = 'delete';
 export const LOAD = 'load';
@@ -33,15 +31,7 @@ export function load() {
     xhr.open('GET', 'http://my-json-server.typicode.com/mate-academy/literary-blog/authors');
     xhr.responseType = 'json';
     xhr.addEventListener('load', () => {
-      const listOfAuthors = xhr.response
-        .map((item, index) => (
-          <li
-            onClick={selectItem(index)}
-            key={item}
-          >
-            {item}
-          </li>
-));
+      const listOfAuthors = xhr.response;
       dispatch(display(listOfAuthors));
     });
     xhr.send();
@@ -52,12 +42,6 @@ export function display(list) {
   return {
     type: DISPLAY,
     authorList: list,
-  };
-}
-
-export function clearSelection(index) {
-  return {
-    type: CLEAR_SELECTION,
   };
 }
 

@@ -1,11 +1,14 @@
 import { connect } from 'react-redux';
 import Authors from './Authors';
-import { load, moveDown, moveUp, selectItem } from '../redux/actions';
+import {
+  load, moveDown, moveUp, removeItem, selectItem,
+} from '../redux/actions';
 
 function mapStateToProps(state) {
   return {
     authorRequested: state.requested,
     author: state.authorList,
+    selectedItem: state.selectedItem,
   };
 }
 
@@ -14,7 +17,8 @@ function mapDispatchToProps(dispatch) {
     buttonClicked: () => dispatch(load()),
     buttonUp: () => dispatch(moveUp()),
     buttonDown: () => dispatch(moveDown()),
-    selected: () => dispatch(selectItem()),
+    selected: index => dispatch(selectItem(index)),
+    remove: () => dispatch(removeItem()),
   };
 }
 

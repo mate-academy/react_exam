@@ -3,16 +3,28 @@ import PropTypes from 'prop-types';
 
 function Authors(props) {
   const {
-    authorRequested, author, buttonClicked, buttonUp, buttonDown,
+    authorRequested, author, buttonClicked, buttonUp, buttonDown, selected, selectedItem, remove
   } = props;
 
   if (!authorRequested) {
     return <button type="button" onClick={buttonClicked}>Load</button>;
   } if (author === null) {
     return <span>Loading...</span>;
-  } return (
+  }
+
+  return (
     <>
-      <ul>{author}</ul>
+      <ul>
+        {author.map((item, index) => (
+          <li
+            className={index === selectedItem ? 'active' : null}
+            onClick={() => selected(index)}
+          >
+            {item}
+            <a href="#" onClick={remove}>x</a>
+          </li>
+))}
+      </ul>
       <button type="button" onClick={buttonUp}>UP</button>
       <button type="button" onClick={buttonDown}>DOWN</button>
     </>
@@ -27,4 +39,5 @@ Authors.propTypes = {
   buttonClicked: PropTypes.func.isRequired,
   buttonUp: PropTypes.func.isRequired,
   buttonDown: PropTypes.func.isRequired,
+  selected: PropTypes.func.isRequired,
 };

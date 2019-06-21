@@ -1,5 +1,5 @@
 import {
-  DISPLAY, EDIT_ITEM, LOAD, MOVE_DOWN, MOVE_UP, REMOVE_ITEM, SELECT_ITEM,
+  DISPLAY, LOAD, MOVE_DOWN, MOVE_UP, REMOVE_ITEM, SELECT_ITEM,
 } from './actions';
 
 const initialState = {
@@ -13,7 +13,7 @@ export const reducer = (state = initialState, action) => {
   switch (action.type) {
     case LOAD:
       return {
-        state,
+        ...state,
         requested: true,
       };
     case DISPLAY:
@@ -27,29 +27,27 @@ export const reducer = (state = initialState, action) => {
         selectedItem: action.payload,
       };
     case MOVE_UP:
-      if (action.selectedItem === 0) {
-        return state;
-      }
       selectedAuthor = state.authorList.splice(action.selectedItem, 1);
       state.authorList.splice(action.selectedItem - 1, 0, selectedAuthor[0]);
       return {
+        ...state,
         authorList: state.authorList,
         selectedItem: action.selectedItem - 1,
       };
     case MOVE_DOWN:
-      if (action.selectedItem === 0) {
-        return state;
-      }
       selectedAuthor = state.authorList.splice(action.selectedItem, 1);
       state.authorList.splice(action.selectedItem + 1, 0, selectedAuthor[0]);
       return {
+        ...state,
         authorList: state.authorList,
         selectedItem: action.selectedItem + 1,
       };
     case REMOVE_ITEM:
+      state.authorList.splice(action.selectedItem, 1);
       return {
         ...state,
-        authorList: state.authorList.filter(),
+        authorList: state.authorList,
+        selectedItem: action.selectedItem - 1,
       };
     default:
       return state;
