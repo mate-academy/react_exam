@@ -1,0 +1,26 @@
+.author-item {
+  height: 30px;
+  display: flex;
+  align-items: flex-start;
+}
+
+.author {
+  margin-right: 5px;
+  display: inline-block;
+  cursor: pointer;
+}
+
+
+.remove-author {
+  line-height: 20px;
+  font-size: 16px;
+  margin-left: 5px;
+  cursor: pointer;
+  color: grey;
+  transition: transform 0.2s ease;
+}
+
+.remove-author:hover {
+  color: red;
+  transform: scale(2);
+}
