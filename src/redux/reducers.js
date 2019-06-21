@@ -30,7 +30,6 @@ export function getNextState(state = initialState, action) {
     case REMOVE_AUTHOR:
       const clonedData = [...state.data];
       clonedData.splice(action.index, 1);
-
       return {
         ...state,
         data: clonedData,

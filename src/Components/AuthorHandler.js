@@ -11,7 +11,7 @@ function mapStateToProps(state, ownProps) {
     edition: state.edit,
     moving: state.move,
     index: state.index,
-    name: ownProps.author,
+    author: ownProps.author,
     id: ownProps.index
   };
 }

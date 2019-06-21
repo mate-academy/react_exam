@@ -14,25 +14,18 @@ function Author(props) {
           replaceAuthor } = props;
 
   if(index === id) {
-    if (edition) {
+    if (edition || moving) {
       return (
         <li className="author">
           <span>{id + 1}. {author}</span>
           <input
-            onKeyDown={(event) => {if (event.key !== 'Enter') return; editAuthor(event.target.value)}}
-            autoFocus placeholder="New name"
-          />
-          <a href="#" onClick={() => removeAuthor(id)}>X</a>
-        </li>
-      )
-    }
-    if (moving) {
-      return (
-        <li className="author">
-          <span>{id + 1}. {author}</span>
-          <input
-            onKeyDown={(event) => {if (event.key !== 'Enter') return; replaceAuthor(event.target.value)}}
-            autoFocus placeholder="New position"
+            onKeyDown={(event) => {
+              if (event.key === 'Enter') {
+                return edition
+                ? editAuthor(event.target.value)
+                : replaceAuthor(event.target.value);
+            }}}
+            autoFocus placeholder={edition ? "New name" : "New position"}
           />
           <a href="#" onClick={() => removeAuthor(id)}>X</a>
         </li>
