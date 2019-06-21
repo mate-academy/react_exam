@@ -1,33 +1,42 @@
-.App {
-  text-align: center;
+.authors {
+  margin: 10px;
+  border: 1px solid #d0d0d0;
+  padding: 10px;
 }
 
-.App-logo {
-  animation: App-logo-spin infinite 20s linear;
-  height: 40vmin;
-  pointer-events: none;
+.author {
+  padding: 10px;
+  border: 1px solid #d0d0d0;
+  margin-bottom: 5px;
 }
 
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
+.authors__head {
+  margin-bottom: 10px;
 }
 
-.App-link {
-  color: #61dafb;
+.authors__update {
+  background: #555;
+  border: none;;
+  color: #fff;
+  padding: 10px;
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+.author:last-child {
+  margin-bottom: 0;
+}
+
+.author__name {
+  font-size: 20px;
+  font-weight: 700;
+  margin-bottom: 5px;
+}
+
+.author:not(.changing) .author__name input,
+.author:not(.changing) .author__edit-change {
+  display: none;
+}
+
+.author.changing .author__name span, 
+.author.changing .author__edit-edit {
+  display: none;
 }
