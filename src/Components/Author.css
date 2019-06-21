@@ -1,0 +1,29 @@
+li {
+  font-size: 16px;
+  display: flex;
+  padding: 5px;
+  color:  rgb(87, 23, 87);
+}
+
+span {
+  width: 220px;
+}
+
+a {
+  display: none;
+  margin-left: 20px;
+}
+
+li:hover {
+  box-shadow: 0px 0px 5px 0px rgba(156,39,156,1);
+}
+
+li:hover a {
+  display: block;
+}
+
+input {
+  padding: 0 7px;
+  outline: none;
+  border: 1px solid rgb(87, 23, 87);
+}
