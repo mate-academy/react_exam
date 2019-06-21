@@ -8,6 +8,7 @@ const initialState = {
   selectedItem: null,
 };
 
+// eslint-disable-next-line import/prefer-default-export
 export const reducer = (state = initialState, action) => {
   let selectedAuthor;
   switch (action.type) {
