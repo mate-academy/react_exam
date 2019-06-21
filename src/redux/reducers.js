@@ -60,7 +60,8 @@ export function reducer(state = initialState, action) {
             return {
                item: item.input,
                displayClass: 'none_active',
-               input: ''
+               input: item.input,
+               focus: true
              } 
           } else {
             return {

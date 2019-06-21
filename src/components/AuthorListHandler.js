@@ -7,7 +7,7 @@ function mapStateToProps(state) {
     items: state.items,
     displayClass: state.dicplayClass,
     editItems: state.editItems,
-    requested: state.requested
+    requested: state.requested,
   }
 }
 

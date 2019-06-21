@@ -30,7 +30,7 @@ export function loadData() {
         return {
           item: item,
           displayClass: 'none_active',
-          input: ''
+          input: item,
         }
       });
         
