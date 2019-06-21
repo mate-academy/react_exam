@@ -1,0 +1,21 @@
+.panel {
+  margin: 20px 500px;
+}
+
+button {
+  margin: 5px;
+  width: auto;
+}
+
+button:nth-child(1) {
+  background-color: #e0ffff;
+}
+
+button:nth-child(2), button:nth-child(3), button:nth-child(4) {
+  background-color: #00ff00;
+}
+
+
+button:nth-child(5) {
+  background-color: #ff0000;
+}
