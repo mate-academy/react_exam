@@ -29,8 +29,10 @@ function ListAuthors(props) {
               }
             })}
           </ul>
-          <button className="move" onClick={() => props.moveUp(props.data, props.index)}>Up</button>
-          <button className="move" onClick={() => props.moveDown(props.data, props.index)}>Down</button>
+          <button disabled={props.index === 0 || props.index === null ? true : false}
+            className="move" onClick={() => props.moveUp(props.data, props.index)}>Up</button>
+          <button disabled={props.index === props.data.length-1 || props.index === null ? true : false}
+            className="move" onClick={() => props.moveDown(props.data, props.index)}>Down</button>
         </React.Fragment>
       );
   }

@@ -20,6 +20,7 @@ body {
   border: none;
   border-radius: 50%;
   transition: box-shadow 400ms cubic-bezier(.2,0,.7,1);
+  cursor: pointer;
 }
 
 .load:hover {
@@ -61,11 +62,16 @@ button {
   border: none;
   background: salmon;
   outline: none;
+}
+
+li > button:hover {
+  box-shadow: 0 0 10px 0 gray;
   cursor: pointer;
 }
 
-button:hover {
+ul ~ button:hover:enabled {
   box-shadow: 0 0 10px 0 gray;
+  cursor: pointer;
 }
 
 .move {
