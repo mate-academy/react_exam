@@ -1,0 +1,22 @@
+button {
+  margin-left: 10px;
+}
+
+.author_name {
+  display: inline-block;
+  width: 200px;
+}
+
+.remove {
+  color: red;
+  margin-left: 15px;
+  cursor: pointer;
+}
+
+.active {
+  display: inline-block;
+}
+
+.none_active {
+  display: none;
+}
