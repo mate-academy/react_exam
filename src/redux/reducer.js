@@ -1,4 +1,4 @@
-import { DELETE_AUTHOR, LOAD_AUTHORS, setLoaded, display, DISPLAY, SET_LOADED, ORDER, order, ADD_ORDER, REMOVE_ORDER } from './actions';
+import { DELETE_AUTHOR, LOAD_AUTHORS, setLoaded, display, DISPLAY, SET_LOADED, ORDER, order, ADD_ORDER, REMOVE_ORDER, START_EDITING_AUTHOR, STOP_EDITING_AUTHOR, EDIT_AUTHOR } from './actions';
 
 const initialState = {
     requestedData: false,
@@ -11,7 +11,7 @@ function rootReducer(state = initialState, action) {
     switch (action.type) {
         case LOAD_AUTHORS: {
             fetch("http://my-json-server.typicode.com/mate-academy/literary-blog/authors").then(data => data.json()).then(data => data.map((value, index) => {
-                return { id: index + 1, name: value, order: index };
+                return { id: index + 1, name: value, order: index, selected: false };
             })).then(data => {
                 action.asyncDispatch(setLoaded(data));
                 action.asyncDispatch(display(data));
@@ -78,9 +78,45 @@ function rootReducer(state = initialState, action) {
         }
 
         case DELETE_AUTHOR: {
-            return { ...state, renderItems: state.renderItems.filter(value => {
-                return value.id != action.payload.id
-            })}
+            return {
+                ...state, renderItems: state.renderItems.filter(value => {
+                    return value.id != action.payload.id
+                })
+            }
+        }
+
+        case START_EDITING_AUTHOR: {
+            
+            let renderItems = [...state.renderItems];
+            let author = renderItems.find( item => item.id === action.payload.id)
+            let indexOf = renderItems.indexOf(author);
+            renderItems[indexOf].selected = true;
+
+            return {
+                ...state, renderItems: renderItems
+            }
+        }
+
+        case STOP_EDITING_AUTHOR: {
+            let renderItems = [...state.renderItems];
+            let author = renderItems.find( item => item.id === action.payload.id)
+            let indexOf = renderItems.indexOf(author);
+            renderItems[indexOf].selected = false;
+            
+            return {
+                ...state, renderItems: renderItems
+            }
+        }
+
+        case EDIT_AUTHOR: {
+            let renderItems = [...state.renderItems];
+            let author = renderItems.find( item => item.id === action.payload.id)
+            let indexOf = renderItems.indexOf(author);
+            renderItems[indexOf].name = action.payload.name;
+            
+            return {
+                ...state, renderItems: renderItems
+            }
         }
 
         default: {

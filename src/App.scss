@@ -16,4 +16,18 @@ table {
   flex-direction: column;
   justify-content: center;
   align-items: center;
+
+  a {
+    cursor: pointer;
+  }
+}
+
+.delete__field {
+  a {
+    cursor: pointer;
+  }
+}
+
+.name__field {
+  cursor: pointer;
 }
