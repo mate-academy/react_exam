@@ -1,22 +1,19 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import Spinner from '../spiner/Spiner';
-import { authorRequested, authorLoaded } from '../../actions/action-creaters';
-import AuthorsService from '../../services/authors-service';
+import { dataLoading } from '../../actions/action-creaters';
+
 import AuthorList from '../author-list/AuthorList';
-import Controllers from '../controllers/Controllers'
-const authorsService = new AuthorsService();
+import Controllers from '../controllers/Controllers';
+
 
 class App extends Component {
   componentDidMount() {
     const {
-      authorRequested,
-      authorLoaded
+      dataLoading
     } = this.props;
 
-    authorRequested();
-    authorsService.getAuthors()
-      .then(data => authorLoaded(data));
+    dataLoading();
   }
 
   render() {
@@ -40,7 +37,6 @@ const mapStateToProps = ({ authors, loading }) => {
 };
 
 const mapDispatchToProps = {
-  authorRequested,
-  authorLoaded
+  dataLoading
 };
 export default connect(mapStateToProps, mapDispatchToProps)(App);

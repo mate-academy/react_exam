@@ -10,16 +10,19 @@ import {
   MOVE_SELECTION_DOWN,
 } from '../action-types';
 
+import AuthorsService from '../../services/authors-service';
+const authorsService = new AuthorsService();
+
 const authorRequested = () => {
   return {
     type: FETCH_AUTHOR_REQUEST
   }
 };
 
-const authorLoaded = (newBooks) => {
+const authorsLoaded = (newAuthors) => {
   return {
     type: FETCH_AUTHOR_SUCCESS,
-    payload: newBooks
+    payload: newAuthors
   };
 };
 
@@ -71,9 +74,17 @@ const clearSelection = () => {
   };
 };
 
+const dataLoading = () => (dispatch) => {
+  dispatch(authorRequested());
+  const promise = authorsService.getAuthors()
+  .then(data => dispatch(authorsLoaded(data)));
+
+  return promise;
+};
+
+
 export {
   authorRequested,
-  authorLoaded,
   selectItem,
   clearSelection,
   moveSelectionUp,
@@ -81,4 +92,5 @@ export {
   changeItem,
   changeInputValue,
   deleteItem,
+  dataLoading
 }
