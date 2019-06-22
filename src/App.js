@@ -1,30 +1,34 @@
 import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import './App.scss';
+import ListItem from './components/ListItem';
+import ItemsList from './components/ItemsList';
+import { connect } from 'react-redux';
+import { loadAuthors } from './redux/actions';
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit
-          {' '}
-          <code>src/App.js</code>
-          {' '}
-and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+const mapStateToProps = state => {
+  return {
+    renderItems: state.renderItems,
+    requestedData: state.requestedData,
+    loadedData: state.loadedData
+  };
+};
+
+function mapDispatchToProps(dispatch) {
+  return {
+    loadAuthors: () => dispatch(loadAuthors())
+  };
 }
 
-export default App;
+class ConnectedApp extends React.Component {
+  render() {
+    if (this.props.requestedData) {
+      if (this.props.renderItems != null)
+        return <ItemsList items={this.props.renderItems} />
+      else
+        return <p> Loading... </p>
+    }
+    return <button onClick={this.props.loadAuthors}>Load</button>;
+  }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(ConnectedApp);

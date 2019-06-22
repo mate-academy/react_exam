@@ -1,0 +1,33 @@
+table {
+  th {
+    background: gray;
+  }
+
+  td,
+  th {
+    text-align: center;
+    padding: 5px;
+    border: 1px solid black;
+  }
+}
+
+.updown__field {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+
+  a {
+    cursor: pointer;
+  }
+}
+
+.delete__field {
+  a {
+    cursor: pointer;
+  }
+}
+
+.name__field {
+  cursor: pointer;
+}
