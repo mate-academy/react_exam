@@ -10,7 +10,6 @@ import {
 
 const initialState = {
   nameList: null,
-  loaded: false,
   selectedItem: null,
   inputValue: null
 };
