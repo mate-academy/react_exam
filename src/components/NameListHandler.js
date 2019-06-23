@@ -1,6 +1,6 @@
 import NameList from './NameList';
 import { connect } from 'react-redux';
-import { request, deleteName, changeNameStart, changeNameEnd, upNameInList, downNameInList } from '../redux/actions';
+import { deleteName, changeNameStart, changeNameEnd, upNameInList, downNameInList } from '../redux/actions';
 
 function mapStateToProps(state) {
   return {
@@ -11,7 +11,6 @@ function mapStateToProps(state) {
 
 function mapDispatchToProps(dispatch) {
   return {
-    //request: dispatch(request()),
     deleting: index => dispatch(deleteName(index)),
     startEdit: index => dispatch(changeNameStart(index)),
     endEdit: index => dispatch(changeNameEnd(index)),
