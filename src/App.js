@@ -1,29 +1,20 @@
 import React from 'react';
-import logo from './logo.svg';
 import './App.css';
+import { createStore, applyMiddleware } from 'redux';
+import { Provider } from 'react-redux';
+import { NameListHandler } from './components/NameListHandler'
+import { getNextState } from './redux/reducer';
+import thunk from 'redux-thunk';
+import { request } from './redux/actions'
+
+const store = createStore(getNextState, applyMiddleware(thunk))
+store.dispatch(request())
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit
-          {' '}
-          <code>src/App.js</code>
-          {' '}
-and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <Provider store={store}>
+      <NameListHandler />
+    </Provider>
   );
 }
 
