@@ -1,1 +1,1 @@
-https://ronyshchenko.github.io/react_exam/build/index.html
+https://ronyshchenko.github.io/react_exam/
