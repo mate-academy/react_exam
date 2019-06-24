@@ -1,0 +1,34 @@
+.manipulator {
+  position: absolute;
+  display: flex;
+  flex-flow: row nowrap;
+}
+
+.manipulator-button {
+  border-radius: 4px;
+  height: 30px;
+  width: 30px;
+  padding: 5px;
+}
+
+.manipulator-button:hover {
+  animation: hover-scale 300ms;
+}
+
+.context-image {
+  border-radius: 50%;
+  font-size: 20px;
+}
+
+.manipulator-button:hover > .context-image {
+  animation: hover-scale 300ms;
+}
+
+@keyframes hover-scale {
+  from {
+    transform: scale(1);
+  }
+  to {
+    transform: scale(1.2);
+  }
+}
