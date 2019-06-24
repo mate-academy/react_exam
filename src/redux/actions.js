@@ -6,7 +6,7 @@ export const DOWN_NAME_IN_LIST = 'downNameInList';
 export const MAKE_REQUEST = 'makeRequest';
 
 export function request() {
-  return (dispatch) => {
+  return dispatch => {
     fetch('http://my-json-server.typicode.com/mate-academy/literary-blog/authors')
       .then(response => response.json())
       .then(authors => {

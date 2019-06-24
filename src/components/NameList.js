@@ -10,7 +10,13 @@ export default function NameList({ nameList, deleting, startEdit, endEdit, selec
           if (isSelected) {
             return (
               <li key={author}>
-                <input type="text" defaultValue={author} onKeyPress={event => { if (event.charCode === 13) endEdit(event.target.value) }} />
+                <input type="text" defaultValue={author} onKeyDown={event => {
+                  if(event.keyCode === 13) {
+                    endEdit(event.target.value)
+                  } else if (event.keyCode === 27) {
+                    endEdit(author)
+                  }
+                }} />
                 <button className="edit" onClick={event => endEdit(event.target.previousSibling.value)}>&#10003;</button>
                 <button className="delete" onClick={() => deleting(index)}>&times;</button>
                 <button className='position' disabled={index === 0} onClick={() => up(index)}>up</button>
