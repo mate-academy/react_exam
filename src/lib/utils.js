@@ -6,7 +6,14 @@ function displaceElement(
   if (shiftToIndex === shiftingIndex) { return [...array]; }
 
   const resultArray = [];
-  const shiftingSign = shiftToIndex > shiftingIndex ? 1 : -1;
+  let shiftingSign;
+  if (shiftToIndex === shiftingIndex) {
+    shiftingSign = 0;
+  } else if (shiftToIndex > shiftingIndex) {
+    shiftingSign = 1;
+  } else {
+    shiftingSign = -1;
+  }
   let hasShifting = false;
 
   for (let index = 0; index < array.length; index += 1) {

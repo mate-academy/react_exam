@@ -1,82 +1,107 @@
-import React from 'react';
+import React, {Fragment} from 'react';
 import PropTypes from 'prop-types';
 import ManipulatorHandler from './ManipulatorHandler';
-import { AUTHOR_DISPLACE_MARKERS } from '../redux/actions';
+import { AUTHOR_DISPLACE_MARKERS, AUTHOR_ITEM_STATES } from '../redux/actions';
+import './AuthorItem.css';
 
 const AuthorItem = (props) => {
   const {
     id,
     authorName,
+    inputValue,
     hovered,
-    focused,
+    selected,
+    focusedItemState,
     marker,
     onMouseEnter,
+    onUpdateInputValue,
+    onCancelInputting,
     onApplyNewName,
     unwrapped,
     displaceAuthorItem,
   } = props;
 
   return (
-    <section
-      className="item-wrapper"
-      onMouseEnter={hovered ? null : onMouseEnter}
-    >
-      {(marker === AUTHOR_DISPLACE_MARKERS.ABOVE || focused) && (
+    <Fragment>
+      {(marker === AUTHOR_DISPLACE_MARKERS.ABOVE || selected)
+      && focusedItemState === AUTHOR_ITEM_STATES.MOVING
+      && (
         <button
           type="button"
-          className={`marker${hovered ? ' hovered' : ''}`}
+          className="marker"
           onClick={() => displaceAuthorItem(id)}
         >
-          {focused ? '▼' : '▲'}
+          {selected ? '▼' : '▲'}
         </button>
       )}
-      <label
-        htmlFor={`author_${id}`}
-        className="author-name"
+      <section
+        className={`item-wrapper${hovered ? ' hovered' : ''}`}
+        onMouseEnter={onMouseEnter}
       >
-        {authorName}
-        <input
-          name={`author_${id}`}
-          className={unwrapped ? 'unwrapped' : 'wrapped'}
-          type="text"
-          defaultValue={authorName}
-          onKeyPress={(keyPressEvent) => {
-            if (keyPressEvent.code === 'Enter') {
-              onApplyNewName(keyPressEvent.target.value.trim());
-            }
-          }}
-        />
-      </label>
-      {(marker === AUTHOR_DISPLACE_MARKERS.BELOW || focused) && (
+        <label
+          htmlFor={`author_${id}`}
+          className="author-name"
+        >
+          {authorName}
+          <input
+            name={`author_${id}`}
+            className={unwrapped ? 'unwrapped' : 'wrapped'}
+            type="text"
+            value={inputValue}
+            disabled={!unwrapped}
+            onKeyDown={(event) => {
+              switch (event.key) {
+                case 'Enter':
+                  onApplyNewName(event.target.value.trim());
+                  break;
+                case 'Escape':
+                  onCancelInputting();
+                  break;
+                default:
+              }
+            }}
+            onChange={event => onUpdateInputValue(event.target.value.trim())}
+          />
+        </label>
+        {
+          hovered && !selected && <ManipulatorHandler ownerId={id} />
+        }
+      </section>
+      {(marker === AUTHOR_DISPLACE_MARKERS.BELOW || selected)
+      && focusedItemState === AUTHOR_ITEM_STATES.MOVING
+      && (
         <button
           type="button"
-          className={`marker${hovered ? ' hovered' : ''}`}
+          className="marker"
           onClick={() => displaceAuthorItem(id)}
         >
-          {focused ? '▲' : '▼'}
+          {selected ? '▲' : '▼'}
         </button>
       )}
-      {
-        hovered && !focused && <ManipulatorHandler ownerId={id} />
-      }
-    </section>
+    </Fragment>
   );
 };
 
 AuthorItem.defaultProps = {
   unwrapped: false,
+  inputValue: '',
+  focusedItemState: null,
 };
 
 AuthorItem.propTypes = {
   id: PropTypes.string.isRequired,
   authorName: PropTypes.string.isRequired,
   hovered: PropTypes.bool.isRequired,
-  focused: PropTypes.bool.isRequired,
+  selected: PropTypes.bool.isRequired,
   marker: PropTypes.string.isRequired,
   displaceAuthorItem: PropTypes.func.isRequired,
+  inputValue: PropTypes.string,
   unwrapped: PropTypes.bool,
+  focusedItemState: PropTypes.string,
   onMouseEnter: PropTypes.func.isRequired,
   onApplyNewName: PropTypes.func.isRequired,
+  onUpdateInputValue: PropTypes.func.isRequired,
+  onCancelInputting: PropTypes.func.isRequired,
 };
 
 export default AuthorItem;

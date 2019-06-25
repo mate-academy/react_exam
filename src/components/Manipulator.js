@@ -1,6 +1,7 @@
 import React from 'react';
 import { string, func } from 'prop-types';
 import { AUTHOR_ITEM_STATES } from '../redux/actions';
+import './Manipulator.css';
 
 function Manipulator(props) {
   const { ownerId, onSelectState, onRemoveClick } = props;

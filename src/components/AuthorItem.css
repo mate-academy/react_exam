@@ -1,0 +1,88 @@
+.item-wrapper {
+  margin: 0 auto;
+  display: flex;
+  flex-flow: column nowrap;
+  padding: 10px 10%;
+  position: relative;
+  border-radius: 4px;
+  width: 60%;
+}
+
+.author-name {
+  width: 100%;
+}
+
+.hovered {
+  animation: item-hover 300ms;
+  transform: scale(1.05);
+  box-shadow: 0 0 0.5em darkgoldenrod;
+}
+
+.hovered > label > input {
+  border-color: limegreen;
+}
+
+.wrapped,
+.unwrapped {
+  position: absolute;
+  box-sizing: border-box;
+  right: 5%;
+  padding: 0;
+  border-radius: 12px;
+  height: 24px;
+}
+
+.wrapped {
+  border: 1px solid darkslateblue;
+  width: 0;
+}
+
+.unwrapped {
+  border: 1px solid limegreen;
+  animation: unwrapping 400ms;
+  width: 90%;
+  padding: 2px 14px;
+  box-shadow: inset 1px 2px 0.5em cadetblue;
+}
+
+.marker {
+  margin: 0 auto;
+  color: lightslategrey;
+  width: 100%;
+  background-color: white;
+  border: none;
+  padding: 0 auto;
+}
+
+.marker:hover {
+  color: limegreen;
+  box-shadow: 0 0 0.5em #61dafb;
+}
+
+@keyframes item-hover {
+  from {
+    transform: none;
+    box-shadow: none;
+  }
+  to {
+    transform: scale(1.05);
+    box-shadow: 0 0 0.5em darkgoldenrod;
+  }
+}
+
+@keyframes unwrapping {
+  0% {
+    width: 0;
+    border: 1px solid darkslateblue;
+    padding: 2px 14px;
+  }
+  70% {
+    width: 90%;
+    padding: 2px 14px;
+  }
+  100% {
+    width: 90%;
+    padding: 2px 14px;
+    box-shadow: inset 0 0 0.5em cadetblue;
+  }
+}

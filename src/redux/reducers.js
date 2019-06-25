@@ -6,7 +6,9 @@ import {
   LOAD_BUTTON_CLICKED,
   PLACE_AUTHOR_ITEM,
   REMOVE_AUTHOR_ITEM,
-  HANDLE_INPUT_NEW_NAME,
+  HANDLE_ENTER_NEW_NAME,
+  UPDATE_INPUT_VALUE,
+  CANCEL_INPUTTING,
 } from './actions';
 
 const actionHandlers = {
@@ -16,9 +18,9 @@ const actionHandlers = {
   }),
   [DISPLAY_AUTHOR_ITEMS]: (previousState, { payload: loadedAuthorsList }) => {
     const authorsRenderList = [];
-    const authorsById = loadedAuthorsList.reduce((obj, authorsName, id) => {
+    const authorsById = loadedAuthorsList.reduce((obj, authorName, id) => {
       authorsRenderList.push(id.toString());
-      return { ...obj, [id]: authorsName };
+      return { ...obj, [id]: { authorName, inputValue: authorName } };
     }, {});
 
     return {
@@ -31,16 +33,53 @@ const actionHandlers = {
     ...previousState,
     hoveredAuthorId: authorId,
   }),
-  [HANDLE_INPUT_NEW_NAME]: (previousState, { payload: newName }) => {
+  [UPDATE_INPUT_VALUE]: (previousState, { payload: newValue }) => {
+    const { authorsById, focusedAuthorId } = previousState;
+    const { authorName } = authorsById[focusedAuthorId];
+
+    return {
+      ...previousState,
+      authorsById: {
+        ...authorsById,
+        [previousState.focusedAuthorId]: {
+          authorName,
+          inputValue: newValue,
+        },
+      },
+    };
+  },
+  [HANDLE_ENTER_NEW_NAME]: (previousState, { payload: newName }) => {
     if (newName === '') {
       return previousState;
     }
+
     return {
       ...previousState,
       authorsById: {
         ...previousState.authorsById,
-        [previousState.focusedAuthorId]: newName,
+        [previousState.focusedAuthorId]: {
+          authorName: newName,
+          inputValue: newName,
+        },
       },
+      focusedAuthorId: null,
+    };
+  },
+  [CANCEL_INPUTTING]: (previousState) => {
+    const { authorsById, focusedAuthorId } = previousState;
+    const { authorName } = authorsById[focusedAuthorId];
+
+    return {
+      ...previousState,
+      authorsById: {
+        ...authorsById,
+        [previousState.focusedAuthorId]: {
+          authorName,
+          inputValue: authorName,
+        },
+      },
+      focusedAuthorId: null,
+      focusedItemState: null,
     };
   },
   [PLACE_AUTHOR_ITEM]: (previousState) => {
@@ -60,7 +99,8 @@ const actionHandlers = {
         shiftToIndex,
       ),
       focusedAuthorId: null,
-      hoveredAuthorId: previousState.hoveredAuthorId,
+      focusedItemState: null,
+      // hoveredAuthorId: previousState.hoveredAuthorId,
     };
   },
   [HANDLE_FOCUS_ON_AUTHOR_ITEM]: (previousState, { payload }) => ({

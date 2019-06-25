@@ -4,6 +4,8 @@ import {
   displaceAuthorItem,
   handleAuthorHovering,
   handleRenaming,
+  updateInputValue,
+  cancelRenaming,
   AUTHOR_ITEM_STATES,
 } from '../redux/actions';
 
@@ -14,7 +16,10 @@ function mapStateToProps(state, ownProps) {
     focusedAuthorId,
     focusedItemState,
     authorsById: {
-      [id]: authorName,
+      [id]: {
+        authorName,
+        inputValue,
+      },
     },
   } = state;
 
@@ -22,6 +27,8 @@ function mapStateToProps(state, ownProps) {
 
   const mappedProps = {
     authorName,
+    inputValue,
+    focusedItemState,
     selected: focused,
     hovered: focusedAuthorId ? false : id === hoveredAuthorId,
   };
@@ -35,9 +42,11 @@ function mapStateToProps(state, ownProps) {
 
 function mapDispatchToProps(dispatch, ownProps) {
   return {
+    onUpdateInputValue: newValue => dispatch(updateInputValue(newValue)),
     onApplyNewName: newName => dispatch(handleRenaming(newName)),
     onMouseEnter: () => dispatch(handleAuthorHovering(ownProps.id)),
     displaceAuthorItem: () => dispatch(displaceAuthorItem(ownProps.id)),
+    onCancelInputting: () => dispatch(cancelRenaming()),
   };
 }
 

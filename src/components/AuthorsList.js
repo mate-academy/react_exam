@@ -1,12 +1,47 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import './AuthorsList.css';
+import { AUTHOR_DISPLACE_MARKERS, AUTHOR_ITEM_STATES } from '../redux/actions';
+import AuthorItemHandler from './AuthorItemHandler';
 
 function AuthorsList(props) {
-  const { children, loading, loadingAuthorsList } = props;
+  const {
+    loading,
+    loadingAuthorsList,
+    authorsRenderList,
+    focusedAuthorId,
+    focusedItemState,
+  } = props;
+  let focusedOccurred = false;
+  let marker;
 
   return (
     <div className="list-wrapper">
-      {children}
+      {authorsRenderList
+        ? authorsRenderList.map(
+          (authorId) => {
+            if (authorId === focusedAuthorId) { focusedOccurred = true; }
+            marker = '';
+            if (
+              focusedItemState === AUTHOR_ITEM_STATES.MOVING
+              && focusedAuthorId !== authorId
+            ) {
+              if (focusedOccurred === true) {
+                marker = AUTHOR_DISPLACE_MARKERS.BELOW;
+              } else {
+                marker = AUTHOR_DISPLACE_MARKERS.ABOVE;
+              }
+            }
+
+            return (
+              <AuthorItemHandler
+                key={authorId}
+                id={authorId}
+                marker={marker}
+              />
+            );
+          }
+        ) : null}
       {!loading && (
         <button
           type="button"
@@ -22,16 +57,16 @@ function AuthorsList(props) {
 }
 
 AuthorsList.defaultProps = {
-  children: null,
   loading: null,
+  authorsRenderList: null,
+  focusedAuthorId: null,
+  focusedItemState: null,
 };
 
 AuthorsList.propTypes = {
-  children: PropTypes.oneOf([
-    null,
-    PropTypes.object,
-    PropTypes.arrayOf(PropTypes.object),
-  ]),
+  authorsRenderList: PropTypes.arrayOf(PropTypes.string),
+  focusedAuthorId: PropTypes.string,
+  focusedItemState: PropTypes.string,
   loading: PropTypes.bool,
   loadingAuthorsList: PropTypes.func.isRequired,
 };
