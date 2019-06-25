@@ -30,7 +30,7 @@ function mapDispatchToProps(dispatch) {
 
       xhr.open(
         'GET',
-        'http://my-json-server.typicode.com/mate-academy/literary-blog/authors',
+        'https://my-json-server.typicode.com/mate-academy/literary-blog/authors',
       );
       xhr.responseType = 'json';
       xhr.addEventListener('load', () => {
