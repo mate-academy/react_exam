@@ -1,0 +1,16 @@
+.selected {
+  background: orange;
+}
+
+article:not(.selected) .show-selected-item {
+  display: none;
+}
+
+button {
+  margin: 5px;
+  cursor: pointer;
+}
+
+article:hover {
+  cursor: pointer;
+}
