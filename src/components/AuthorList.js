@@ -1,17 +1,17 @@
 import React from 'react'
-import { Author } from './Author';
 import './AuthorList.css';
+import { AuthorHandler } from './AuthorHandler';
 
 export  function AuthorList(props) {
   const {
     authorList,
     authorsRequested,
     buttonClicked,
-    removeAuthor,
-    itemClicked,
-    addValueToInput,
     input,
-    changeInputValue
+    changeInputValue,
+    index,
+    moveUp,
+    moveDown
    } = props;
 
   if (!authorsRequested) {
@@ -25,33 +25,32 @@ export  function AuthorList(props) {
           {authorList.map((author, index) => {
             return (
               <div key={index}>
-                <Author
-                  itemClicked={itemClicked}
+                <AuthorHandler
                   author={author}
                   index={index}
-                  removeAuthor={removeAuthor}
-                  addValueToInput={addValueToInput}
                 />
               </div>
             );
           })}
           <div>
             <button
-              onClick={() => props.moveUp(props.index)}
-              disabled={props.index === 0 || props.index === null}
+              onClick={() => moveUp(index)}
+              disabled={index === 0 || index === null}
             >Move Up
             </button>
             <button
-              onClick={() => props.moveDown(props.index)}
-              disabled={props.index === props.authorList.length - 1 || props.index === null}
+              onClick={() => moveDown(index)}
+              disabled={index === authorList.length - 1 || index === null}
             >Move Down
             </button>
           </div>
-          <label>
-            Editor
-            <input type="text" name="edit" defaultValue={input} onChange={(event) => changeInputValue(event.target.value)} />
-          </label>
-          <button type="button">Save</button>
+          <div className="editor">
+            <label>
+              Editor
+              <input type="text" name="edit" defaultValue={input} onChange={(event) => changeInputValue(event.target.value)} />
+            </label>
+            <button type="button">Save</button>
+          </div>
         </div>        
       );
     }
