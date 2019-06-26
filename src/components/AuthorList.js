@@ -54,8 +54,8 @@ export  function AuthorList(props) {
               />
             </label>
             <button type="button"
-            onClick={() => saveChangedValue()}
-            disabled={isEditorDisabled}
+              onClick={() => saveChangedValue()}
+              disabled={isEditorDisabled}
             >Save
             </button>
           </div>
