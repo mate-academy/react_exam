@@ -67,11 +67,10 @@ export function moveDown() {
   }
 }
 
-export function addValueToInput(input, index) {
+export function addValueToInput(input) {
   return {
     type: ADD_VALUE_TO_INPUT,
-    input,
-    index
+    input
   }
 }
 
@@ -82,9 +81,8 @@ export function changeInputValue(value) {
   }
 }
 
-export function saveChangedValue(value) {
+export function saveChangedValue() {
   return {
     type: SAVE_CHANGED_VALUE,
-    value
   }
 }

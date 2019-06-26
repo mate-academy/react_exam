@@ -15,11 +15,11 @@ const initialState = {
   selectedIndex: null,
   requested: false,
   authorList: null,
-  input: ''
+  input: null
 }
 
 export function reducer(state = initialState, action) {
-  const { selectedIndex, authorList } = state;
+  const { selectedIndex, authorList, input } = state;
 
   switch(action.type) {
     case LOAD_DATA:
@@ -37,7 +37,8 @@ export function reducer(state = initialState, action) {
     case REMOVE_AUTHOR:
       return {
         ...state,
-        authorList: authorList.slice(0, action.index).concat(authorList.slice(action.index + 1))
+        authorList: authorList.slice(0, action.index).concat(authorList.slice(action.index + 1)),
+        selectedIndex: null
       };
 
     case SELECT_ITEM:
@@ -92,22 +93,40 @@ export function reducer(state = initialState, action) {
     case ADD_VALUE_TO_INPUT:
       return {
         ...state,
-        input: authorList.find(item => item === action.input)
+        input: authorList[selectedIndex]
       }
 
     case CHANGE_INPUT_VALUE:
       return {
         ...state,
         input: action.value
-                
       }
 
     case SAVE_CHANGED_VALUE:
-      return {
-        ...state,
-        
+      if (input !== '') {
+        return {
+          ...state,
+          authorList: authorList.map((author, index) => {
+            if (index !== selectedIndex) {
+              return author;
+            } else {
+              return input;
+            }
+          }),
+          input: null,
+          selectedIndex: null
+        } 
+      } else {
+        return {
+          ...state,
+          authorList: authorList.filter((author, index) => {
+            return selectedIndex !== index;
+          }),
+          input: null,
+          selectedIndex: null
+        }
       }
-
+      
     default:
       return state;
   }

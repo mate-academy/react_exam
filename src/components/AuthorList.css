@@ -1,3 +1,7 @@
+.container {
+  margin: 20px;
+}
+
 .author-item {
   align-items: center;
   display: flex;
@@ -38,4 +42,12 @@
 .selected {
   display: inline-block;
   background-color: #ffff00;
+}
+
+.editor {
+  margin-top: 15px;
+}
+
+.editor__field {
+  margin-left: 5px;
 }

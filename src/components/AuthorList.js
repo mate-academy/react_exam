@@ -11,8 +11,12 @@ export  function AuthorList(props) {
     changeInputValue,
     index,
     moveUp,
-    moveDown
+    moveDown,
+    saveChangedValue
    } = props;
+
+   const isInputEmpty = input !== null;
+   const isEditorDisabled = isInputEmpty ? false : true;
 
   if (!authorsRequested) {
     return <button onClick={buttonClicked}>Load</button>;
@@ -21,16 +25,9 @@ export  function AuthorList(props) {
       return <span>Loading...</span>;
     } else {
       return (
-        <div>
+        <div className="container">
           {authorList.map((author, index) => {
-            return (
-              <div key={index}>
-                <AuthorHandler
-                  author={author}
-                  index={index}
-                />
-              </div>
-            );
+            return <AuthorHandler key={index} author={author} index={index}/>;
           })}
           <div>
             <button
@@ -46,10 +43,21 @@ export  function AuthorList(props) {
           </div>
           <div className="editor">
             <label>
-              Editor
-              <input type="text" name="edit" defaultValue={input} onChange={(event) => changeInputValue(event.target.value)} />
+              Editor: 
+              <input 
+                type="text" 
+                name="edit"
+                className="editor__field" 
+                disabled={isEditorDisabled}
+                value={isInputEmpty ? input : ''}
+                onChange={(event) => changeInputValue(event.target.value)}
+              />
             </label>
-            <button type="button">Save</button>
+            <button type="button"
+            onClick={() => saveChangedValue()}
+            disabled={isEditorDisabled}
+            >Save
+            </button>
           </div>
         </div>        
       );
