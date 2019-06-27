@@ -1,0 +1,78 @@
+article {
+  display: flex;
+  flex-direction: row;
+}
+
+.author {
+  display: flex;
+  justify-content: space-between;
+  width: 300px;
+  margin: 10px;
+}
+
+.author p {
+  padding: 0;
+  margin: 0;
+  border: 1px solid darkred;
+  border-radius: 100px;
+  padding: 10px;
+}
+
+.author-btn {
+  line-height: 40px;
+  margin: 10px;
+  width: 200px;
+}
+
+article:not(.selected) .show-when-selected {
+  display: none;
+}
+
+.selected {
+  background-color: rgb(0, 255, 242, .2);
+  border-radius: 100px;
+  font-weight: bold;
+}
+
+input {
+  margin: 10px;
+  border-radius: 100px;
+  outline: none;
+  border: 1px solid slateblue;
+  padding-left: 15px;
+}
+.btn {
+  outline: none;
+  font-size: 17px;
+  background-color: lightblue;
+  border-radius: 5px;
+  border: none;
+  color: #fff;
+  margin-right: 5px;
+  transition: all .5s;
+}
+
+.btn:hover {
+  background-color: orange;
+}
+
+.btn-remove {
+  color: #fff;
+  border: none;
+  outline: none;
+  font-size: 30px;
+  background: none;
+  transition: all .5s;
+}
+
+.btn-remove:hover {
+  color: red;
+}
+
+.btn:disabled {
+  opacity: .3;
+}
+
+.btn:hover:disabled {
+  opacity: .1;
+}
