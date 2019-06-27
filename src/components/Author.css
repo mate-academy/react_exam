@@ -11,9 +11,8 @@ article {
 }
 
 .author p {
-  padding: 0;
   margin: 0;
-  border: 1px solid darkred;
+  border: 2px solid darkred;
   border-radius: 100px;
   padding: 10px;
 }
