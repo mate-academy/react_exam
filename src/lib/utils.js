@@ -1,34 +1,31 @@
 function displaceElement(
   array,
-  shiftingIndex,
-  shiftToIndex,
+  shiftingStartIndex,
+  indexToDisplace,
 ) {
-  if (shiftToIndex === shiftingIndex) { return [...array]; }
+  if (indexToDisplace === shiftingStartIndex) { return array; }
 
-  const resultArray = [];
-  let shiftingSign;
-  if (shiftToIndex === shiftingIndex) {
-    shiftingSign = 0;
-  } else if (shiftToIndex > shiftingIndex) {
-    shiftingSign = 1;
+  const resultArray = [...array];
+
+  const displacingElements = resultArray.splice(
+    Math.min(shiftingStartIndex, indexToDisplace),
+    Math.abs(shiftingStartIndex - indexToDisplace) + 1,
+    'marker'
+  );
+  const displacingElement = indexToDisplace > shiftingStartIndex
+    ? displacingElements.shift()
+    : displacingElements.pop();
+
+  if (indexToDisplace > shiftingStartIndex) {
+    displacingElements.push(displacingElement);
   } else {
-    shiftingSign = -1;
+    displacingElements.unshift(displacingElement);
   }
-  let hasShifting = false;
-
-  for (let index = 0; index < array.length; index += 1) {
-    if (index === shiftToIndex) {
-      hasShifting = !hasShifting;
-      resultArray.push(array[shiftingIndex]);
-    } else if (index === shiftingIndex) {
-      hasShifting = !hasShifting;
-      resultArray.push(array[shiftToIndex]);
-    } else if (hasShifting) {
-      resultArray.push(array[index + shiftingSign]);
-    } else {
-      resultArray.push(array[index]);
-    }
-  }
+  resultArray.splice(
+    Math.min(shiftingStartIndex, indexToDisplace),
+    1,
+    ...displacingElements
+  );
 
   return resultArray;
 }

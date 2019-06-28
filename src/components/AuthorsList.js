@@ -15,33 +15,35 @@ function AuthorsList(props) {
   let focusedOccurred = false;
   let marker;
 
+  const list = authorsRenderList
+    ? authorsRenderList.map(
+      (authorId) => {
+        if (authorId === focusedAuthorId) { focusedOccurred = true; }
+        marker = '';
+        if (
+          focusedItemState === AUTHOR_ITEM_STATES.MOVING
+          && focusedAuthorId !== authorId
+        ) {
+          if (focusedOccurred === true) {
+            marker = AUTHOR_DISPLACE_MARKERS.BELOW;
+          } else {
+            marker = AUTHOR_DISPLACE_MARKERS.ABOVE;
+          }
+        }
+
+        return (
+          <AuthorItemHandler
+            key={authorId}
+            id={authorId}
+            marker={marker}
+          />
+        );
+      }
+    ) : null;
+
   return (
     <div className="list-wrapper">
-      {authorsRenderList
-        ? authorsRenderList.map(
-          (authorId) => {
-            if (authorId === focusedAuthorId) { focusedOccurred = true; }
-            marker = '';
-            if (
-              focusedItemState === AUTHOR_ITEM_STATES.MOVING
-              && focusedAuthorId !== authorId
-            ) {
-              if (focusedOccurred === true) {
-                marker = AUTHOR_DISPLACE_MARKERS.BELOW;
-              } else {
-                marker = AUTHOR_DISPLACE_MARKERS.ABOVE;
-              }
-            }
-
-            return (
-              <AuthorItemHandler
-                key={authorId}
-                id={authorId}
-                marker={marker}
-              />
-            );
-          }
-        ) : null}
+      {list}
       {!loading && (
         <button
           type="button"

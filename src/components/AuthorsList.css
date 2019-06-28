@@ -3,9 +3,10 @@
   padding: 10px;
   margin: 30px auto;
   width: 35%;
-  font-size: calc(6px + 3vh);
+  min-width: 200px;
+  font-size: calc(6px + 2vh);
   box-shadow: 0 0 1em cadetblue, inset -3px -4px 1em darkkhaki;
-  border-radius: 2px;
+  border-radius: 6px;
 }
 
 .load-button {

@@ -82,25 +82,24 @@ const actionHandlers = {
       focusedItemState: null,
     };
   },
-  [PLACE_AUTHOR_ITEM]: (previousState) => {
+  [PLACE_AUTHOR_ITEM]: (previousState, { payload: placeId }) => {
     const {
       authorsRenderList,
-      hoveredAuthorId,
       focusedAuthorId,
     } = previousState;
-    const shiftingIndex = authorsRenderList.indexOf(focusedAuthorId);
-    const shiftToIndex = authorsRenderList.indexOf(hoveredAuthorId);
+    const indexToStartShift = authorsRenderList.indexOf(focusedAuthorId);
+    const indexToDisplace = authorsRenderList.indexOf(placeId);
 
     return {
       ...previousState,
       authorsRenderList: displaceElement(
         authorsRenderList,
-        shiftingIndex,
-        shiftToIndex,
+        indexToStartShift,
+        indexToDisplace,
       ),
       focusedAuthorId: null,
       focusedItemState: null,
-      // hoveredAuthorId: previousState.hoveredAuthorId,
+      hoveredAuthorId: previousState.hoveredAuthorId,
     };
   },
   [HANDLE_FOCUS_ON_AUTHOR_ITEM]: (previousState, { payload }) => ({
@@ -108,23 +107,13 @@ const actionHandlers = {
     focusedAuthorId: payload.authorId,
     focusedItemState: payload.selectedState,
   }),
-  [REMOVE_AUTHOR_ITEM]: (previousState, { payload: authorIdToRemove }) => {
-    delete previousState.authorsById[authorIdToRemove];
-
-    return {
-      ...previousState,
-      authorsById: { ...previousState.authorsById },
-      authorsRenderList: previousState.authorsRenderList.reduce(
-        (newList, currItemId) => {
-          if (currItemId !== authorIdToRemove) {
-            return [...newList, currItemId];
-          }
-          return newList;
-        },
-        [],
-      ),
-    };
-  },
+  [REMOVE_AUTHOR_ITEM]: (previousState, { payload: authorIdToRemove }) => ({
+    ...previousState,
+    authorsById: { ...previousState.authorsById },
+    authorsRenderList: previousState.authorsRenderList.filter(
+      authorId => authorId !== authorIdToRemove
+    ),
+  }),
 };
 
 const initialStore = {

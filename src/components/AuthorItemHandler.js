@@ -15,13 +15,8 @@ function mapStateToProps(state, ownProps) {
     hoveredAuthorId,
     focusedAuthorId,
     focusedItemState,
-    authorsById: {
-      [id]: {
-        authorName,
-        inputValue,
-      },
-    },
   } = state;
+  const { authorName, inputValue } = state.authorsById[id];
 
   const focused = id === focusedAuthorId;
 
@@ -30,7 +25,7 @@ function mapStateToProps(state, ownProps) {
     inputValue,
     focusedItemState,
     selected: focused,
-    hovered: focusedAuthorId ? false : id === hoveredAuthorId,
+    hovered: id === hoveredAuthorId,
   };
 
   if (focused) {

@@ -2,9 +2,9 @@ import { connect } from 'react-redux';
 import Manipulator from './Manipulator';
 import { removeAuthorItem, handleFocus } from '../redux/actions';
 
-function mapDispatchToProps(dispatch, ownProps) {
+function mapDispatchToProps(dispatch) {
   return {
-    onRemoveClick: () => dispatch(removeAuthorItem(ownProps.ownerId)),
+    onRemoveClick: authorId => dispatch(removeAuthorItem(authorId)),
     onSelectState: (authorId, selectedState) => dispatch(
       handleFocus({ authorId, selectedState })
     ),

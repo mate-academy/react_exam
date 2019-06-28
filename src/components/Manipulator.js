@@ -29,9 +29,7 @@ function Manipulator(props) {
       <button
         type="button"
         className="manipulator-button remove"
-        onClick={
-          () => onRemoveClick(ownerId)
-        }
+        onClick={() => onRemoveClick(ownerId)}
       >
         <span className="context-image" role="img" aria-label="Remove">
           &#128465;

@@ -45,9 +45,10 @@ export function removeAuthorItem(payload) {
   };
 }
 
-export function displaceAuthorItem() {
+export function displaceAuthorItem(payload) {
   return {
     type: PLACE_AUTHOR_ITEM,
+    payload,
   };
 }
 

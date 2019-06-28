@@ -1,5 +1,6 @@
-import React, {Fragment} from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
+import ReactCSSTransitionGroup from 'react-addons-css-transition-group';
 import ManipulatorHandler from './ManipulatorHandler';
 import { AUTHOR_DISPLACE_MARKERS, AUTHOR_ITEM_STATES } from '../redux/actions';
 import './AuthorItem.css';
@@ -22,18 +23,39 @@ const AuthorItem = (props) => {
   } = props;
 
   return (
-    <Fragment>
-      {(marker === AUTHOR_DISPLACE_MARKERS.ABOVE || selected)
-      && focusedItemState === AUTHOR_ITEM_STATES.MOVING
-      && (
-        <button
-          type="button"
-          className="marker"
-          onClick={() => displaceAuthorItem(id)}
-        >
-          {selected ? '▼' : '▲'}
-        </button>
-      )}
+    <ReactCSSTransitionGroup
+      transitionName={{
+        appear: 'item-appear',
+        appearActive: 'item-appearActive',
+      }}
+      transitionAppear
+      transitionEnter={false}
+      transitionLeave={false}
+      transitionAppearTimeout={700}
+    >
+      <ReactCSSTransitionGroup
+        transitionName={{
+          enter: 'enter',
+          enterActive: 'enterActive',
+          leave: 'leave',
+          leaveActive: 'leaveActive',
+        }}
+        transitionEnterTimeout={300}
+        transitionLeaveTimeout={300}
+      >
+        {(marker === AUTHOR_DISPLACE_MARKERS.ABOVE || selected)
+        && focusedItemState === AUTHOR_ITEM_STATES.MOVING
+        && (
+          <button
+            key={`${id}_upper-marker`}
+            type="button"
+            className={`marker${hovered ? ' marker-hover' : ''}`}
+            onClick={displaceAuthorItem}
+          >
+            {selected ? '▼' : '▲'}
+          </button>
+        )}
+      </ReactCSSTransitionGroup>
       <section
         className={`item-wrapper${hovered ? ' hovered' : ''}`}
         onMouseEnter={onMouseEnter}
@@ -60,25 +82,50 @@ const AuthorItem = (props) => {
                 default:
               }
             }}
-            onChange={event => onUpdateInputValue(event.target.value.trim())}
+            onChange={event => onUpdateInputValue(event.target.value)}
           />
         </label>
-        {
-          hovered && !selected && <ManipulatorHandler ownerId={id} />
-        }
-      </section>
-      {(marker === AUTHOR_DISPLACE_MARKERS.BELOW || selected)
-      && focusedItemState === AUTHOR_ITEM_STATES.MOVING
-      && (
-        <button
-          type="button"
-          className="marker"
-          onClick={() => displaceAuthorItem(id)}
+        <ReactCSSTransitionGroup
+          transitionName={{
+            enter: 'manipulator-enter',
+            enterActive: 'manipulator-enter-active',
+            leave: 'manipulator-leave',
+            leaveActive: 'manipulator-leave-active',
+          }}
+          transitionEnterTimeout={150}
+          transitionLeaveTimeout={200}
         >
-          {selected ? '▲' : '▼'}
-        </button>
-      )}
-    </Fragment>
+          {
+            hovered
+            && !selected
+            && <ManipulatorHandler key={`manipulator_${id}`} ownerId={id} />
+          }
+        </ReactCSSTransitionGroup>
+      </section>
+      <ReactCSSTransitionGroup
+        transitionName={{
+          enter: 'enter',
+          enterActive: 'enterActive',
+          leave: 'leave',
+          leaveActive: 'leaveActive',
+        }}
+        transitionEnterTimeout={300}
+        transitionLeaveTimeout={300}
+      >
+        {(marker === AUTHOR_DISPLACE_MARKERS.BELOW || selected)
+        && focusedItemState === AUTHOR_ITEM_STATES.MOVING
+        && (
+          <button
+            key={`${id}_lower-marker`}
+            type="button"
+            className={`marker${hovered ? ' marker-hover' : ''}`}
+            onClick={displaceAuthorItem}
+          >
+            {selected ? '▲' : '▼'}
+          </button>
+        )}
+      </ReactCSSTransitionGroup>
+    </ReactCSSTransitionGroup>
   );
 };
 
