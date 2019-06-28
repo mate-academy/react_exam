@@ -8,6 +8,7 @@ import './AuthorItem.css';
 const AuthorItem = (props) => {
   const {
     id,
+    listIndex,
     authorName,
     inputValue,
     hovered,
@@ -64,6 +65,10 @@ const AuthorItem = (props) => {
           htmlFor={`author_${id}`}
           className="author-name"
         >
+          {
+            focusedItemState === AUTHOR_ITEM_STATES.MOVING
+              && (<span className="list-index">{`${listIndex}.) `}</span>)
+          }
           {authorName}
           <input
             name={`author_${id}`}
@@ -137,6 +142,7 @@ AuthorItem.defaultProps = {
 
 AuthorItem.propTypes = {
   id: PropTypes.string.isRequired,
+  listIndex: PropTypes.number.isRequired,
   authorName: PropTypes.string.isRequired,
   hovered: PropTypes.bool.isRequired,
   selected: PropTypes.bool.isRequired,

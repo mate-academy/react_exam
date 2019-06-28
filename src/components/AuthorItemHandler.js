@@ -10,7 +10,7 @@ import {
 } from '../redux/actions';
 
 function mapStateToProps(state, ownProps) {
-  const { id } = ownProps;
+  const { id, listIndex } = ownProps;
   const {
     hoveredAuthorId,
     focusedAuthorId,
@@ -24,6 +24,7 @@ function mapStateToProps(state, ownProps) {
     authorName,
     inputValue,
     focusedItemState,
+    listIndex,
     selected: focused,
     hovered: id === hoveredAuthorId,
   };

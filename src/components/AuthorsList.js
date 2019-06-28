@@ -17,7 +17,7 @@ function AuthorsList(props) {
 
   const list = authorsRenderList
     ? authorsRenderList.map(
-      (authorId) => {
+      (authorId, index) => {
         if (authorId === focusedAuthorId) { focusedOccurred = true; }
         marker = '';
         if (
@@ -35,6 +35,7 @@ function AuthorsList(props) {
           <AuthorItemHandler
             key={authorId}
             id={authorId}
+            listIndex={index}
             marker={marker}
           />
         );
