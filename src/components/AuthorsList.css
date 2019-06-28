@@ -1,0 +1,50 @@
+.list-wrapper {
+  position: relative;
+  padding: 10px;
+  margin: 30px auto;
+  width: 35%;
+  min-width: 200px;
+  font-size: calc(6px + 2vh);
+  box-shadow: 0 0 1em cadetblue, inset -3px -4px 1em darkkhaki;
+  border-radius: 6px;
+}
+
+.load-button {
+  margin: 0 auto;
+  display: block;
+  width: 200px;
+  height: 35px;
+  border-radius: 4px;
+  background-color: lightsalmon;
+  color: lightcyan;
+  text-shadow: 0 0 2px black;
+  font-weight: bold;
+  border: 2px outset darkslategray;
+  box-shadow: 1px 2px 0.4em darkslateblue, inset -1px -2px 0.5em navajowhite;
+  box-sizing: content-box;
+}
+
+.load-button:hover {
+  animation: button-hovering 300ms;
+  transform: scale(1.1);
+  background-color: navajowhite;
+  border-radius: 6px;
+  box-shadow: 1px 2px 0.4em darkslateblue, inset -1px -2px 0.5em lightsalmon;
+}
+
+@keyframes button-hovering {
+  from {
+    transform: scale(1);
+    background-color: lightsteelblue;
+    border-radius: 4px;
+    border: 2px outset darkslategray;
+    box-shadow: 1px 2px 0.4em darkslateblue, inset -1px -2px 0.5em navajowhite;
+  }
+  to {
+    transform: scale(1.1);
+    background-color: navajowhite;
+    border-radius: 6px;
+    border: 2px outset darkgoldenrod;
+    box-shadow: 1px 2px 0.4em darkslateblue, inset -1px -2px 0.5em lightsalmon;
+  }
+}
