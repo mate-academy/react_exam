@@ -1,0 +1,2 @@
+body{display:-webkit-flex;display:flex;-webkit-flex-direction:column;flex-direction:column;text-align:center}.item{display:inline-block;font-weight:700;margin:0;cursor:pointer}.item .delete,.item .edit{display:none;color:red;font-size:x-small}.item:hover .delete,.item:hover .edit{display:inline}.selected{border:1px solid #639;color:#1e90ff}.listItems{height:250px}
+/*# sourceMappingURL=main.1742dd13.chunk.css.map */
