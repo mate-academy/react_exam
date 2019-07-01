@@ -21,7 +21,11 @@ function mapDispatchToProps(dispatch) {
     chooseAuthorItem: index => dispatch(chooseAuthorItem(index)),
     changeInputValue: event => dispatch(changeInputValue(event)),
     editItem: index => dispatch(editItem(index)),
-    updateItem: event => dispatch(updateItem(event)),
+    updateItem: event => {
+      if (event.key === 'Enter') {
+        dispatch(updateItem());
+      }
+    },
     removeChosenItem: index => dispatch(removeChosenItem(index)),
   };
 }

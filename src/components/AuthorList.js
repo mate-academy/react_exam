@@ -1,16 +1,33 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import AuthorHandler from './AuthorHandler';
 
 export function AuthorList(props) {
-  if (!props.requested) {
-    return <input type="button" onClick={props.loadItems} value="Download Authors!" />;
-  } else if (props.loadedClothes) {
-    const isItemIndex = props.chosenItemIndex === null;
-    const items = props.authors.map((item, index) => (
+  const {
+    requested,
+    loadItems,
+    loadedClothes,
+    chosenItemIndex,
+    authors,
+    isEditItemNow,
+    moveUpItem,
+    moveDownItem,
+  } = props;
+  if (!requested) {
+    return (
+      <input
+        type="button"
+        onClick={loadItems}
+        value="Download Authors!"
+      />
+    );
+  } if (loadedClothes) {
+    const isItemIndex = chosenItemIndex === null;
+    const items = authors.map((item, index) => (
       <AuthorHandler
-        className={props.chosenItemIndex === index ? 'selected' : ''}
+        className={chosenItemIndex === index ? 'selected' : ''}
         name={item}
-        key={index}
+        key={item}
         index={index}
       />
     ));
@@ -20,23 +37,46 @@ export function AuthorList(props) {
         <div className="listItems">{items}</div>
         <div>
           <input
-            disabled={props.chosenItemIndex === 0 || isItemIndex || props.isEditItemNow}
+            disabled={
+              chosenItemIndex === 0
+            || isItemIndex
+            || isEditItemNow
+            }
             type="button"
-            onClick={props.moveUpItem}
+            onClick={moveUpItem}
             value="move Up"
           />
           <input
-            disabled={props.chosenItemIndex === props.authors.length - 1 || isItemIndex || props.isEditItemNow}
+            disabled={
+              chosenItemIndex === authors.length - 1
+            || isItemIndex
+            || isEditItemNow
+            }
             type="button"
-            onClick={props.moveDownItem}
+            onClick={moveDownItem}
             value="move Down"
           />
         </div>
       </section>
     );
-  } else {
-    return (
-      <input type="button" disabled={true} value="Loading..."/>
-    );
   }
+  return (
+    <input type="button" disabled value="Loading..." />
+  );
 }
+
+AuthorList.propTypes = {
+  requested: PropTypes.bool.isRequired,
+  loadItems: PropTypes.func.isRequired,
+  loadedClothes: PropTypes.bool.isRequired,
+  chosenItemIndex: PropTypes.number,
+  authors: PropTypes.arrayOf(PropTypes.string),
+  isEditItemNow: PropTypes.bool.isRequired,
+  moveUpItem: PropTypes.func.isRequired,
+  moveDownItem: PropTypes.func.isRequired,
+};
+
+AuthorList.defaultProps = {
+  chosenItemIndex: null,
+  authors: null,
+};

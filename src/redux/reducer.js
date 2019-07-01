@@ -72,11 +72,9 @@ export default function reducer(state = initialState, action) {
       };
     case UPDATE_ITEM:
       newCopyItems = state.authors.slice();
-      if (action.payload.key === 'Enter') {
-        newCopyItems[state.chosenItemIndex] = state.inputValue;
-        if (state.inputValue.trim() === '') {
-          newCopyItems.splice(state.chosenItemIndex, 1);
-        }
+      newCopyItems[state.chosenItemIndex] = state.inputValue;
+      if (state.inputValue.trim() === '') {
+        newCopyItems.splice(state.chosenItemIndex, 1);
       }
       return {
         ...state,
