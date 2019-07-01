@@ -19,10 +19,10 @@ export  function AuthorList(props) {
    const isEditorDisabled = isInputEmpty ? false : true;
 
   if (!authorsRequested) {
-    return <button onClick={buttonClicked}>Load</button>;
+    return <button className="loading-btn"onClick={buttonClicked}>Load data</button>;
   } else {
     if (authorList === null) {
-      return <span>Loading...</span>;
+      return <button className="loading-btn">Loading...</button>;
     } else {
       return (
         <div className="container">
