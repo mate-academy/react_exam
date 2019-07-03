@@ -18,9 +18,9 @@ export default function Author(props) {
               }
             }}
           />
-          : <div className="author" onClick={props.selectAuthor}>
-              <p>{props.author}</p>
-              <button className="btn-remove" onClick={props.deletedAuthor}>&times;</button>
+          : <div className="author">
+              <p onClick={props.selectAuthor}>{props.author}</p>
+              <button className="btn-remove show-when-selected" onClick={props.deletedAuthor}>&times;</button>
             </div>
       }
       <div className="author-btn">
