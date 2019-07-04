@@ -1,13 +1,10 @@
 body {
+  align-items: center;
+  background: radial-gradient(#4CCEB2, #2F8FD8);
+  display: flex;
+  flex-direction: column;
+  font-family: 'Nunito Sans', sans-serif;
+  justify-content: center;
   margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen",
-    "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue",
-    sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-}
-
-code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
-    monospace;
+  color: #fff;
 }
