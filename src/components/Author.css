@@ -51,7 +51,7 @@ input {
   transition: all .5s;
 }
 
-.btn:hover {
+.btn:hover:not(:disabled) {
   background-color: orange;
 }
 
@@ -72,6 +72,6 @@ input {
   opacity: .3;
 }
 
-.btn:hover:disabled {
+.btn:hover:not(:disabled) {
   opacity: .1;
 }

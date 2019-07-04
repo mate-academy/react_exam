@@ -15,7 +15,7 @@ export function load() {
     dispatch({
       type: LOAD
     });
-    fetch('http://my-json-server.typicode.com/mate-academy/literary-blog/authors')
+    fetch('https://my-json-server.typicode.com/mate-academy/literary-blog/authors')
       .then(date => date.json())
       .then((data) => {
         dispatch(display(data));
