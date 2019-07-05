@@ -15,7 +15,7 @@ export function load() {
     });
 
     const xhr = new XMLHttpRequest();
-    xhr.open('GET', 'http://my-json-server.typicode.com/mate-academy/literary-blog/authors');
+    xhr.open('GET', '//my-json-server.typicode.com/mate-academy/literary-blog/authors');
     xhr.responseType = 'json';
     xhr.addEventListener('load', () => {
         const authorsList = xhr.response;
