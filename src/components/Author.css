@@ -1,0 +1,11 @@
+.selected {
+  background-color: #e0ffff;
+}
+
+.container {
+  margin-left: 500px;
+}
+
+li {
+  width: 200px;
+}
