@@ -4,9 +4,7 @@ import {
   loadData,
   removeSelect,
   moveUp,
-  moveDown,
-  changeInputValue,
-  saveChangedValue
+  moveDown
 } from '../redux/actions';
 
 function mapStateToProps(state) {
@@ -25,8 +23,6 @@ function mapDispatchToProps(dispatch) {
     moveUp: index => dispatch(moveUp(index)),
     moveDown: index => dispatch(moveDown(index)),
     removeSelect: () => dispatch(removeSelect()),
-    changeInputValue: (input) => dispatch(changeInputValue(input)),
-    saveChangedValue: () => dispatch(saveChangedValue())
   };
 }
 

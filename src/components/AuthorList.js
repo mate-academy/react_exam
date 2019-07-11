@@ -1,22 +1,19 @@
 import React from 'react'
 import './AuthorList.css';
 import { AuthorHandler } from './AuthorHandler';
+import { EditorHandler } from './EditorHandler';
 
 export  function AuthorList(props) {
   const {
     authorList,
     authorsRequested,
     buttonClicked,
-    input,
-    changeInputValue,
     index,
     moveUp,
-    moveDown,
-    saveChangedValue
+    moveDown
    } = props;
 
-   const isInputEmpty = input !== null;
-   const isEditorDisabled = isInputEmpty ? false : true;
+   
 
   if (!authorsRequested) {
     return <button className="loading-btn"onClick={buttonClicked}>Load data</button>;
@@ -41,24 +38,7 @@ export  function AuthorList(props) {
             >Move Down
             </button>
           </div>
-          <div className="editor">
-            <label>
-              Editor: 
-              <input 
-                type="text" 
-                name="edit"
-                className="editor__field" 
-                disabled={isEditorDisabled}
-                value={isInputEmpty ? input : ''}
-                onChange={(event) => changeInputValue(event.target.value)}
-              />
-            </label>
-            <button type="button"
-              onClick={() => saveChangedValue()}
-              disabled={isEditorDisabled}
-            >Save
-            </button>
-          </div>
+          <EditorHandler />
         </div>        
       );
     }
